@@ -4,10 +4,13 @@ declare(strict_types=1);
 namespace App\Models;
 
 use App\Interfaces\Reservable;
+use App\Traits\ReservableTrait;
 use InvalidArgumentException;
 
 class DVD extends Material implements Reservable
 {
+    use ReservableTrait;
+
     private int $duracio;
 
     public function __construct(int $id, string $titol, string $autor, int $anyPublicacio, int $duracio)
@@ -30,12 +33,14 @@ class DVD extends Material implements Reservable
     {
         return $this->duracio;
     }
-    public function getDuracioFormatada(): string {
+
+    public function getDuracioFormatada(): string
+    {
         $hores = intdiv($this->duracio, 60);
         $minuts = $this->duracio % 60;
         return "{$hores}h {$minuts}min";
     }
-    
+
     public function setDuracio(int $minuts): void
     {
         if ($minuts <= 0) {
@@ -44,4 +49,3 @@ class DVD extends Material implements Reservable
         $this->duracio = $minuts;
     }
 }
-

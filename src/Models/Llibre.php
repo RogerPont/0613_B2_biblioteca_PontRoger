@@ -4,10 +4,13 @@ declare(strict_types=1);
 namespace App\Models;
 
 use App\Interfaces\Reservable;
+use App\Traits\ReservableTrait;
 use InvalidArgumentException;
 
 class Llibre extends Material implements Reservable
 {
+    use ReservableTrait;
+
     private int $numeroPagines;
 
     public function __construct(int $id, string $titol, string $autor, int $anyPublicacio, int $numeroPagines)
@@ -38,7 +41,4 @@ class Llibre extends Material implements Reservable
         }
         $this->numeroPagines = $pagines;
     }
-
-
-
 }
